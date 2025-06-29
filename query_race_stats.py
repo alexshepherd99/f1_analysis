@@ -4,8 +4,8 @@ from datetime import datetime
 import logging
 from time import sleep
 import os
+from common import setup_logging, CACHE_FILE_DRIVER_STATS
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
 BASE_URL = "https://api.openf1.org/v1"
 
@@ -76,7 +76,7 @@ def get_grid_and_finish_positions(session_key, driver_number):
     return grid_position, final_position
 
 def main():
-    cache_file = "f1_driver_stats.csv"
+    cache_file = CACHE_FILE_DRIVER_STATS
     # Try to load cached DataFrame
     if os.path.exists(cache_file):
         df = pd.read_csv(cache_file)
@@ -177,9 +177,10 @@ def main():
                 cached_keys.add(cache_key)
                 logging.info(f"Added and cached driver {driver_number} for session {session_key}")
 
-    print(df.head())
-    # Optionally, save to CSV
-    df.to_csv("f1_driver_stats.csv", index=False)
+    logging.info(df.head())
+    logging.info(f"Final cache file had {len(df)} rows.")
+
 
 if __name__ == "__main__":
+    setup_logging()
     main()
