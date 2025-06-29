@@ -20,6 +20,7 @@ def get_races(start_year=2020):
         url = f"{BASE_URL}/sessions"
         params = {"year": year, "session_type": "Race"}
         logging.info(f"API call: {url} | params: {params}")
+        sleep(1)  # To avoid hitting API rate limits
         resp = requests.get(url, params=params)
         resp.raise_for_status()
         data = resp.json()
@@ -32,6 +33,7 @@ def get_drivers_for_race(session_key):
     url = f"{BASE_URL}/drivers"
     params = {"session_key": session_key}
     logging.info(f"API call: {url} | params: {params}")
+    sleep(1)  # To avoid hitting API rate limits
     resp = requests.get(url, params=params)
     resp.raise_for_status()
     data = resp.json()
@@ -85,7 +87,7 @@ def main():
         df = pd.DataFrame()
         logging.info("No cache found, starting with empty DataFrame.")
 
-    races = get_races(start_year=2024)
+    races = get_races(start_year=2023)
 
     # Group races by year and country, keep only the most recent race per country per year
     races_by_year_country = {}
