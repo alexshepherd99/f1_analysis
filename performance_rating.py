@@ -75,6 +75,34 @@ def add_normalized_score_column(
     return df_copy
 
 
+# Configuration dictionary for score weights
+SCORE_WEIGHTS = {
+    "best_lap_time": 1.0,
+    "avg_lap_time": 1.0,
+    "position_change": 1.0,
+    "final_position": 1.0,
+}
+
+def add_weighted_score_column(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Returns a new DataFrame with a new column 'weighted_score' which is the sum of each
+    score column (prefixed with 'score_') multiplied by its corresponding weight from SCORE_WEIGHTS.
+    The input DataFrame is not modified.
+    """
+    df_copy = df.copy()
+    weighted_scores = []
+    score_columns = [f"score_{col}" for col in SCORE_WEIGHTS.keys()]
+
+    # Calculate weighted score for each row
+    for _, row in df_copy.iterrows():
+        weighted_sum = sum(row[score_col] * SCORE_WEIGHTS[col]
+                           for col, score_col in zip(SCORE_WEIGHTS.keys(), score_columns))
+        weighted_scores.append(weighted_sum)
+
+    df_copy["weighted_score"] = weighted_scores
+    return df_copy
+
+
 def main():
     df_driver_stats = pd.read_csv(CACHE_FILE_DRIVER_STATS)
     logging.info(f"Loaded driver stats: {df_driver_stats.shape}")
@@ -90,6 +118,9 @@ def main():
 
     df_driver_stats = add_normalized_score_column(df_driver_stats, "final_position", higher_is_better=False)
     logging.info(f"After final_position normalization: {df_driver_stats.shape}")
+
+    df_driver_stats = add_weighted_score_column(df_driver_stats)
+    logging.info(f"After adding weighted scores: {df_driver_stats.shape}")
 
     df_driver_stats.to_csv(CACHE_FILE_DRIVER_PERF, index=False)
     logging.info(f"Saved processed driver stats to {CACHE_FILE_DRIVER_PERF}")
