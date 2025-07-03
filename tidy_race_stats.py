@@ -1,5 +1,6 @@
 import pandas as pd
-from common import CACHE_FILE_DRIVER_STATS
+import logging
+from common import CACHE_FILE_DRIVER_STATS, setup_logging
 
 # Configuration dictionary for team name mapping
 TEAM_NAME_MAPPING = {
@@ -33,10 +34,19 @@ def add_team_name_mapped_column(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def main():
+    setup_logging()
+    logging.info(f"Loading dataframe from {CACHE_FILE_DRIVER_STATS}")
     df = pd.read_csv(CACHE_FILE_DRIVER_STATS)
+    logging.info(f"Loaded dataframe shape: {df.shape}")
+
     df = add_driver_surname_column(df)
+    logging.info(f"After add_driver_surname_column: {df.shape}")
+
     df = add_team_name_mapped_column(df)
+    logging.info(f"After add_team_name_mapped_column: {df.shape}")
+
     df.to_csv(CACHE_FILE_DRIVER_STATS, index=False)
+    logging.info(f"Saved dataframe to {CACHE_FILE_DRIVER_STATS} with shape: {df.shape}")
 
 
 if __name__ == "__main__":
