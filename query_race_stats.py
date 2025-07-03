@@ -186,3 +186,10 @@ def main():
 if __name__ == "__main__":
     setup_logging()
     main()
+
+    #TODO modify weighted score so final position is doubled
+    #TODO Map down team names
+    # RB / Racing Bulls / AlphaTauri
+    # Kick Sauber / Alfa Romeo
+    #TODO trim driver name to just surname
+
