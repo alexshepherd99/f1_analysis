@@ -80,7 +80,7 @@ SCORE_WEIGHTS = {
     "best_lap_time": 1.0,
     "avg_lap_time": 1.0,
     "position_change": 1.0,
-    "final_position": 1.0,
+    "final_position": 2.0,
 }
 
 def add_weighted_score_column(df: pd.DataFrame) -> pd.DataFrame:
