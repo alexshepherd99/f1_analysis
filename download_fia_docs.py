@@ -17,7 +17,7 @@ def load_and_update_fia_docs():
 
     # Get last entered values for defaults
     last_season = int(df["season"].iloc[-1]) if not df.empty else ""
-    last_race_number = int(df["race number"].iloc[-1]) if not df.empty else 0
+    last_race_number = int(df["race_number"].iloc[-1]) if not df.empty else 0
 
     while True:
         # Prompt for season
