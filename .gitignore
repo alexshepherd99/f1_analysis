@@ -1,3 +1,4 @@
 *.pyc
 
+fia_docs/
 __pycache__/
