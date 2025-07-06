@@ -12,7 +12,7 @@ def load_and_update_fia_docs():
         df = pd.read_csv(CACHE_FILE_FIA_DOCS)
         logging.info(f"Loaded FIA docs cache: {df.shape}")
     else:
-        df = pd.DataFrame(columns=["season", "race number", "pdf URL"])
+        df = pd.DataFrame(columns=["season", "race_number", "pdf_url"])
         logging.info("No FIA docs cache found. Created empty dataframe: (0, 3)")
 
     # Get last entered values for defaults
@@ -49,8 +49,8 @@ def load_and_update_fia_docs():
         # Add new row
         df = pd.concat([df, pd.DataFrame([{
             "season": season,
-            "race number": race_number,
-            "pdf URL": pdf_url
+            "race_number": race_number,
+            "pdf_url": pdf_url
         }])], ignore_index=True)
 
         # Save cache
@@ -83,7 +83,7 @@ def download_missing_fia_pdfs():
     logging.info(f"Loaded FIA docs cache: {df.shape}")
 
     for idx, row in df.iterrows():
-        pdf_url = row["pdf URL"]
+        pdf_url = row["pdf_url"]
         filename = os.path.basename(pdf_url)
         local_path = os.path.join(CACHE_FOLDER_FIA_DOCS, filename)
         if os.path.exists(local_path):
@@ -104,5 +104,5 @@ def download_missing_fia_pdfs():
 
 
 if __name__ == "__main__":
-    # load_and_update_fia_docs()
+    load_and_update_fia_docs()
     download_missing_fia_pdfs()
