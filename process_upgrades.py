@@ -1,7 +1,13 @@
 import os
 import pandas as pd
 import logging
-from common import DATA_FILE_UPGRADES, CACHE_FILE_FIA_DOCS, setup_logging
+from common import (
+    DATA_FILE_UPGRADES,
+    CACHE_FILE_FIA_DOCS,
+    CACHE_FILE_DRIVER_PERF,
+    setup_logging,
+    OUTPUT_FILE_PERF_AND_UPGRADES
+)
 
 TEAM_NAME_MAPPING = {
     "Aston Martin Aramco F1 Team": "Aston Martin",
@@ -53,10 +59,14 @@ def main():
 
     df_fia_docs = load_fia_docs_with_filename()
 
-    df_merged = pd.merge(df_upgrades, df_fia_docs, on="Filename", how="left")
-    if len(df_merged) != len(df_upgrades):
-        raise Exception(f"Row count changed after merge: {len(df_upgrades)} -> {len(df_merged)}")
-    logging.info(f"Merged DataFrame shape: {df_merged.shape}")
+    df_upgrades_merged = pd.merge(df_upgrades, df_fia_docs, on="Filename", how="left")
+    if len(df_upgrades_merged) != len(df_upgrades):
+        raise Exception(f"Row count changed after merge: {len(df_upgrades)} -> {len(df_upgrades_merged)}")
+    logging.info(f"Merged DataFrame shape: {df_upgrades_merged.shape}")
+
+    df_perf = pd.read_csv(CACHE_FILE_DRIVER_PERF)
+
+    # Write ouput to OUTPUT_FILE_PERF_AND_UPGRADES
 
 if __name__ == "__main__":
     main()
