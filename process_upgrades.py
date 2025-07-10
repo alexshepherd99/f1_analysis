@@ -66,7 +66,20 @@ def main():
 
     df_perf = pd.read_csv(CACHE_FILE_DRIVER_PERF)
 
+    # Merge df_perf (left) with df_upgrades_merged (right) on season, race_number, team_name_mapped
+    df_perf_merged = df_perf.merge(
+        df_upgrades_merged,
+        on=["season_year", "race_number", "team_name_mapped"],
+        how="left"
+    )
+    logging.info(f"Final merged DataFrame shape: {df_perf_merged.shape}")
+    if len(df_perf_merged) != len(df_perf):
+        raise Exception(f"Row count changed after merge: {len(df_perf)} -> {len(df_perf_merged)}")
+
     # Write ouput to OUTPUT_FILE_PERF_AND_UPGRADES
+    df_perf_merged.to_excel(OUTPUT_FILE_PERF_AND_UPGRADES, index=False)
+    logging.info(f"Output written to {OUTPUT_FILE_PERF_AND_UPGRADES}")
+
 
 if __name__ == "__main__":
     main()

@@ -12,11 +12,11 @@ def load_and_update_fia_docs():
         df = pd.read_csv(CACHE_FILE_FIA_DOCS)
         logging.info(f"Loaded FIA docs cache: {df.shape}")
     else:
-        df = pd.DataFrame(columns=["season", "race_number", "pdf_url"])
+        df = pd.DataFrame(columns=["season_year", "race_number", "pdf_url"])
         logging.info("No FIA docs cache found. Created empty dataframe: (0, 3)")
 
     # Get last entered values for defaults
-    last_season = int(df["season"].iloc[-1]) if not df.empty else ""
+    last_season = int(df["season_year"].iloc[-1]) if not df.empty else ""
     last_race_number = int(df["race_number"].iloc[-1]) if not df.empty else 0
 
     while True:
@@ -48,7 +48,7 @@ def load_and_update_fia_docs():
 
         # Add new row
         df = pd.concat([df, pd.DataFrame([{
-            "season": season,
+            "season_year": season,
             "race_number": race_number,
             "pdf_url": pdf_url
         }])], ignore_index=True)
