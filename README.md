@@ -1,5 +1,16 @@
 # f1_analysis
 
+Run some analysis on F1 team and driver performance over the course of a season, producing a combined metric that represents and combines grid position, final position, average and best lap times.  Download and process the FIA Car Presentation Summary documents (PDFs) to extract the number and type of upgrades brought by each team to each race, and combine this with the race performance to see if there is a corrlation.
+
+## Method
+
+The how is key here, as this was intended as an experimental use of GitHub Copilot to write the code, along with use of Gemini for some document processing as below.  The output data was loaded into Tableau Public for some visualations.
+
+## Links
+
+* https://openf1.org/ : Open web API for a plethora of F1 race statistics
+* https://www.fia.com/documents/championships/fia-formula-one-world-championship-14/ : FIA documents
+
 ## Processing the FIA documents
 
 I could not coerce Copilot to write code that would parse the PDF FIA car submission documents, even though they are a relatively simple tabular structure.  Rather than flog that one relentlessly, I got Gemini to process them for me, and write the outputs into a tabular format that can be appended to the bottom of "2025_fia_car_presentations.xlsx".  Of the various LLM coding tools I tried, Gemini had the most capacity to process files with the free tier.
