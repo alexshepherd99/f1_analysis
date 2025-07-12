@@ -6,6 +6,12 @@ Run some analysis on F1 team and driver performance over the course of a season,
 
 The how is key here, as this was intended as an experimental use of GitHub Copilot to write the code, along with use of Gemini for some document processing as below.  The output data was loaded into Tableau Public for some visualations.
 
+The vast majority of the code is written directly by Copilot; I have only tweaked a handful of lines at most by hand.  I found it more effective when I knew the structure of the code I wanted to write, and asked it to work on specific functions.  Otherwise, the code quickly became muddled and difficult to read.
+
+The Open F1 API is well documented, however that didn't stop Copilot from hallucinating some endpoints that don't exist.  It took some coercing to get it to specifically stick to existing endpoints.
+
+Surprise surprise, it's all about the prompting.
+
 ## Links
 
 * https://openf1.org/ : Open web API for a plethora of F1 race statistics
