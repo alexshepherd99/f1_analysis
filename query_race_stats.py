@@ -1,3 +1,11 @@
+"""
+This code was auto-generated with GitHub Copilot, with as minimal intervention as possible.  As the first
+file in the project, I started off prompting with a request to write an entire file, and the code very
+quickly became difficult to maintain.  Furthermore, the initial pass as calling the API had a hallucination
+of a web endpoint that did not exist.  Coercing fixes into this method became more difficult over time, and
+I re-prompted from scratch a couple of times.
+"""
+
 import requests
 import pandas as pd
 from datetime import datetime

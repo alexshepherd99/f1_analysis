@@ -1,3 +1,9 @@
+"""
+This code was auto-generated with GitHub Copilot, with as minimal intervention as possible.  For this
+file, I prompted each function one at a time until it worked as expected, then moved on a prompt for the
+next function.  Smarter prompting could undoubtedly have got it to write more functionality in one go.
+"""
+
 import os
 import pandas as pd
 import logging

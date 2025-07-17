@@ -1,3 +1,9 @@
+"""
+This file is the only one that had most of the constants written by me, and just the helper function
+prompted to Copilot.  As with the other scripts, I'm sure that smarter prompting could have overcome
+this, so that it generated consistently labelled constants for me.
+"""
+
 import logging
 
 CACHE_FILE_DRIVER_STATS = "data/f1_driver_stats.csv"
