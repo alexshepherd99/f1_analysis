@@ -1,5 +1,7 @@
 # f1_analysis
 
+dummy amend
+
 Run some analysis on F1 team and driver performance over the course of a season, producing a combined metric that represents and combines grid position, final position, average and best lap times.  Download and process the FIA Car Presentation Summary documents (PDFs) to extract the number and type of upgrades brought by each team to each race, and combine this with the race performance to see if there is a corrlation.
 
 The project was built using the free tier of Github Codespaces.
